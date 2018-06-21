@@ -1,15 +1,23 @@
 import { DashboardComponent } from './dashboard.component';
+import { mock, verify, instance, when } from 'ts-mockito';
+import { HeroService } from '../hero.service';
+import { Observable } from 'rxjs';
 
 describe('DashboardComponent', () => {
   let dashboardComponent: DashboardComponent;
-  const mockHeroService = jasmine.createSpyObj('HeroService', ['getHeroes']);
-  mockHeroService.getHeroes.and.returnValue([]);
+  const mockHeroService: HeroService = mock(HeroService);
+  when(mockHeroService.getHeroes()).thenReturn(new Observable());
+  const heroService: HeroService = instance(mockHeroService);
 
   beforeEach(() => {
-    dashboardComponent = new DashboardComponent(mockHeroService);
+    dashboardComponent = new DashboardComponent(heroService);
   });
 
   it('should create', () => {
     expect(dashboardComponent).toBeTruthy();
+  });
+  it('should get heroes on init', () => {
+    dashboardComponent.ngOnInit();
+    verify(mockHeroService.getHeroes()).called();
   });
 });
