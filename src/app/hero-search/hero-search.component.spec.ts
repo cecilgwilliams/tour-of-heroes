@@ -1,22 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HeroSearchComponent } from './hero-search.component';
 
 describe('HeroSearchComponent', () => {
   let component: HeroSearchComponent;
-  let fixture: ComponentFixture<HeroSearchComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HeroSearchComponent ]
-    })
-    .compileComponents();
-  }));
+  const mockHeroService = jasmine.createSpyObj('HeroService', ['getHeroes']);
+  mockHeroService.getHeroes.and.returnValue([]);
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeroSearchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new HeroSearchComponent(mockHeroService);
   });
 
   it('should create', () => {

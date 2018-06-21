@@ -1,22 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HeroesComponent } from './heroes.component';
 
 describe('HeroesComponent', () => {
   let component: HeroesComponent;
-  let fixture: ComponentFixture<HeroesComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HeroesComponent ]
-    })
-    .compileComponents();
-  }));
+  const mockHeroService = jasmine.createSpyObj('HeroService', ['getHeroes']);
+  mockHeroService.getHeroes.and.returnValue([]);
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeroesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new HeroesComponent(mockHeroService);
   });
 
   it('should create', () => {

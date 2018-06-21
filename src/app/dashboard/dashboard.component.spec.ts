@@ -1,25 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DashboardComponent } from './dashboard.component';
 
 describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
-    })
-    .compileComponents();
-  }));
+  let dashboardComponent: DashboardComponent;
+  const mockHeroService = jasmine.createSpyObj('HeroService', ['getHeroes']);
+  mockHeroService.getHeroes.and.returnValue([]);
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    dashboardComponent = new DashboardComponent(mockHeroService);
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(dashboardComponent).toBeTruthy();
   });
 });

@@ -1,15 +1,13 @@
-import { TestBed, inject } from '@angular/core/testing';
-
 import { HeroService } from './hero.service';
 
 describe('HeroService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [HeroService]
-    });
-  });
+  let heroService: HeroService;
+  const mockHttpClient = jasmine.createSpyObj('HttpClient', ['get<Hero[]>']);
+  const mockMessageService = jasmine.createSpyObj('MessageService', ['add', 'clear']);
 
-  it('should be created', inject([HeroService], (service: HeroService) => {
-    expect(service).toBeTruthy();
-  }));
+  beforeEach(() => { heroService = new HeroService(mockHttpClient, mockMessageService); });
+
+  it('should be created', () => {
+    expect(heroService).toBeTruthy();
+  });
 });

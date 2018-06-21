@@ -8,7 +8,7 @@ describe('AppComponent', () => {
   it('should create the app', () => {
     expect(app).toBeTruthy();
   });
-  it(`should have as title 'app'`, () => {
-    expect(app.title).toEqual('app');
+  it(`should have as title 'Tour of Heroes'`, () => {
+    expect(app.title).toEqual('Tour of Heroes');
   });
 });
