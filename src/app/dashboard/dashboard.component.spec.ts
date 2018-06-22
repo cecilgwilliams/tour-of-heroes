@@ -1,12 +1,14 @@
 import { DashboardComponent } from './dashboard.component';
 import { mock, verify, instance, when } from 'ts-mockito';
 import { HeroService } from '../hero.service';
-import { Observable } from 'rxjs';
+import { from } from 'rxjs';
 
 describe('DashboardComponent', () => {
   let dashboardComponent: DashboardComponent;
+
+  const expectedHeroes = [ {'id': 1, 'name': 'Hero 1'}, {'id': 2, 'name': 'Hero 2'}];
   const mockHeroService: HeroService = mock(HeroService);
-  when(mockHeroService.getHeroes()).thenReturn(new Observable());
+  when(mockHeroService.getHeroes()).thenReturn(from([expectedHeroes]));
   const heroService: HeroService = instance(mockHeroService);
 
   beforeEach(() => {
@@ -16,8 +18,15 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(dashboardComponent).toBeTruthy();
   });
-  it('should get heroes on init', () => {
+  it('should call get heroes on init', () => {
+    spyOn(dashboardComponent, 'getHeroes');
     dashboardComponent.ngOnInit();
-    verify(mockHeroService.getHeroes()).called();
+    expect(dashboardComponent.getHeroes).toHaveBeenCalled();
   });
+  it('should get all heroes from hero service', () => {
+    dashboardComponent.getHeroes();
+    verify(mockHeroService.getHeroes()).called();
+    expect(dashboardComponent.heroes).toBe(expectedHeroes);
+  });
+
 });
