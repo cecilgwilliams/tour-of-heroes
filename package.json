@@ -29,7 +29,8 @@
     "zone.js": "^0.8.26",
     "extend": "^3.0.2",
     "lodash": "^4.17.11",
-    "crypiles": "^4.1.2"
+    "crypiles": "^4.1.2",
+    "url-parse": "^1.4.4"
   },
   "devDependencies": {
     "@angular/language-service": "^6.0.3",
